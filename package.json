@@ -16,7 +16,14 @@
     "@quasar/extras": "^1.16.4",
     "quasar": "^2.16.0",
     "vue": "^3.4.18",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.12",
+    "@cornerstonejs/calculate-suv": "1.1.0",
+    "@cornerstonejs/core": "2.1.2",
+    "@cornerstonejs/dicom-image-loader": "2.1.2",
+    "@cornerstonejs/tools": "2.1.2",
+    "dcmjs": "0.33.0",
+    "dicom-parser": "1.8.21",
+    "dicomweb-client": "0.10.4"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.16.0",
@@ -33,7 +40,7 @@
     "typescript": "~5.5.4"
   },
   "engines": {
-    "node": "^20 || ^18 || ^16",
+    "node": "^22 || ^20 || ^18 || ^16",
     "npm": ">= 6.13.4",
     "yarn": ">= 1.21.1"
   }
