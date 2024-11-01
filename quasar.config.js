@@ -9,9 +9,7 @@
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js
 
 import { configure } from 'quasar/wrappers';
-import viteCommonjs from '@originjs/vite-plugin-commonjs';
-import fs from 'fs';
-import path from 'path';
+import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 
 export default configure(function (/* ctx */) {
   return {
@@ -63,11 +61,25 @@ export default configure(function (/* ctx */) {
       // polyfillModulePreload: true,
       // distDir
 
+      /**
+       * Extends the Vite configuration for the application.
+       *
+       * @remarks
+       * This configuration handles specific requirements for:
+       * - WASM decoders used by Cornerstone libraries
+       * - DICOM parser which currently uses CommonJS format
+       *
+       * @param {import('vite').UserConfig} viteConf - The Vite configuration object
+       */
       extendViteConf(viteConf) {
-        viteConf.server.fs.strict = false;
-        // viteConf.optimizeDeps.exclude = ['@cornerstonejs/dicom-image-loader'];
-        // viteConf.optimizeDeps.include = ['dicom-parser'];
-        // viteConf.assetsInclude = ['**/*.wasm'];
+        // Configure plugins
+        viteConf.plugins = [...(viteConf.plugins || []), viteCommonjs()];
+
+        // Configure dependencies
+        viteConf.optimizeDeps = {
+          exclude: ['@cornerstonejs/dicom-image-loader'],
+          include: ['dicom-parser'],
+        };
       },
     },
 
